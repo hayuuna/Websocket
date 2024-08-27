@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 // 8000번 포트에서 HTTP 서버 시작
 app.listen(8000, () => {
-    console.log(`Example app listening on port 8000`)
+    console.log(`Example app listening on port 8001`)
 });
 
 // wss는 웹소켓 서버 인스턴스, 웹소켓 서버를 생성하고 관리하는 역할
