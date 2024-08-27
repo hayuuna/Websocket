@@ -3,25 +3,22 @@ const express = require("express");
 // 프로토콜을 구현하기 위한 라이브러리 실시간 양방향 통신을 해줌
 const { WebSocketServer } = require("ws");
 
+
 const app = express();
 
 // public 디렉토리 내의 정적 파일(html, css, js)을 클라이언트에 제공
 app.use(express.static("public"));
 
-// Vercel은 포트를 자동으로 할당하므로, process.env.PORT를 사용
-const PORT = process.env.PORT || 8000;
-
-// HTTP 서버 시작
-const server = app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+// 8000번 포트에서 HTTP 서버 시작
+app.listen(8000, () => {
+    console.log(`Example app listening on port 8000`)
 });
 
 // wss는 웹소켓 서버 인스턴스, 웹소켓 서버를 생성하고 관리하는 역할
 // ws는 클라이언트의 개별 웹소켓연결, 클라이언트가 서버에 연결될 때마다 생성
 
 // 8001번 포트에서 웹소켓 서버를 생성, 클라이언트와의 실시간 통신을 처리
-// 웹소켓 서버를 HTTP 서버와 동일한 포트에서 실행
-const wss = new WebSocketServer({ server });
+const wss = new WebSocketServer({ port: 8000 });
 
 // 연결된 모든 클라이언트에게 메시지 전송
 wss.broadcast = (message) => {
